@@ -1,0 +1,10 @@
+*.css
+*.patch
+*.svg
+.eslintrc.js
+babel.config.js
+metro.config.js
+assetsTransformer.js
+global.d.ts
+jest.config.js
+tiny-aes.js
