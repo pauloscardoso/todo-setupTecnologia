@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const SignIn: React.FC = () => {
+const Home: React.FC = () => {
   return (
     <View>
-      <Text>Todo List</Text>
+      <Text>Home Screen</Text>
     </View>
   )
 };
 
-export { SignIn };
+export { Home };

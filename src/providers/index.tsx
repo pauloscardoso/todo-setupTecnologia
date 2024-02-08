@@ -8,13 +8,13 @@ import theme from 'src/global/theme';
 import typ from './index.d';
 
 const Providers: React.FC<typ.Props> = ({ children }) => (
-  <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.gray }}>
+  <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.grayLight }}>
     <Provider store={store}>
       {/* <PersistGate persistor={persistor}> */}
-        <ThemeProvider theme={theme as DefaultTheme}>
-          <LoadStatusBar />
-          {children}
-        </ThemeProvider>
+      <ThemeProvider theme={theme as DefaultTheme}>
+        <LoadStatusBar />
+        {children}
+      </ThemeProvider>
       {/* </PersistGate> */}
     </Provider>
   </SafeAreaView>
@@ -25,7 +25,9 @@ export { Providers };
 const LoadStatusBar = () => {
   React.useEffect(() => {
     {
-      Platform.OS === 'android' ? StatusBar.setBackgroundColor(theme.colors.red_primary, true) : undefined;
+      Platform.OS === 'android'
+        ? StatusBar.setBackgroundColor(theme.colors.grayLight, true)
+        : undefined;
     }
   });
 

@@ -7,6 +7,7 @@ export default _;
 export namespace AuthStackProps {
   export type paramList = {
     // Greeting: undefined;
-    SignIn: undefined;
+    Login: undefined;
+    Registration: undefined;
   };
 }
