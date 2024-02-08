@@ -6,6 +6,7 @@ interface Todo {
   completed: boolean;
 }
 
+
 const todoSlice = createSlice({
   name: 'todos',
   initialState: [] as Todo[],
@@ -25,5 +26,5 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addTodo, toggleTodo, deleteTodo } = todoSlice.actions;
+export const actionsTodo = todoSlice.actions;
 export default todoSlice.reducer;
