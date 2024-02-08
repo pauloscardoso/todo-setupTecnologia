@@ -2,8 +2,12 @@ import React from 'react';
 import { Container, Content, ContentTitle, Footer, Input, Text, Touchable } from './styles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import types from './index.d';
+import { Alert } from 'react-native';
+import { firebase } from 'src/firebase/config';
+import { useAppActions } from 'src/store/hooks';
 
 const Registration: React.FC<types.Props> = ({ navigation }) => {
+  const { signIn } = useAppActions();
   const [fullName, setFullName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -13,7 +17,49 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
     navigation.navigate('Login');
   };
 
-  const onRegisterPress = () => {};
+  const onRegisterPress = () => {
+    if (!fullName) {
+      Alert.alert('Invalid Name', 'Please enter your full name');
+      return;
+    }
+    if (!email.match(/\S+@\S+\.\S+/)) {
+      Alert.alert('Invalid Email', 'Please enter a valid email');
+      return;
+    }
+    if (password.length < 6) {
+      Alert.alert('Invalid Password', 'Please enter a password with at least 6 characters');
+      return;
+    }
+    if (!password) {
+      Alert.alert('Invalid Password', 'Please enter your password');
+      return;
+    }
+    if (password !== confirmPassword) {
+      Alert.alert('Passwords do not match', 'Please enter matching passwords');
+      return;
+    }
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((res: any) => {
+        const uid = res.user.uid;
+        const data: types.UserData = {
+          id: uid,
+          email,
+          fullName,
+        };
+        const usersRef = firebase.firestore().collection('users');
+        usersRef.doc(uid).set(data);
+
+        signIn();
+      })
+      .catch((e) => {
+        console.log(`erro ao criar um usuário ${e}`);
+        if (e.code === 'auth/email-already-in-use') {
+          Alert.alert('E-mail already in use', 'Please try another one');
+        }
+      });
+  };
 
   return (
     <Container>
@@ -40,6 +86,7 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
             value={email}
             underlineColorAndroid='transparent'
             autoCapitalize='none'
+            keyboardType='email-address'
           />
           <Input
             placeholderTextColor='#aaaaaa'

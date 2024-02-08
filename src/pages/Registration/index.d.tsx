@@ -4,6 +4,12 @@ namespace _ {
   export interface Props {
     navigation: NavigationProp<ParamListBase>;
   }
+
+  export type UserData = {
+    id: string;
+    email: string;
+    fullName: string;
+  }
 }
 
 export namespace stylesProps {

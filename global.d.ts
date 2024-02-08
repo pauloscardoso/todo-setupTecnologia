@@ -12,6 +12,7 @@ type _StrictUnionHelper<T, TAll> = T extends any ? T & Partial<Record<Exclude<Un
 
 namespace GlobalProps {
   export type all = any;
+  export type error = any;
 
   type elementChild<T = unknown> = {
     children: ((e?: any) => React.ReactChild[]) | React.ReactChild[];

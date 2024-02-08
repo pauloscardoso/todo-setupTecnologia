@@ -7,7 +7,6 @@ import {
   Footer,
   FooterLink,
   Input,
-  // Logo,
   Text,
   Touchable,
 } from './styles';
