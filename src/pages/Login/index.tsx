@@ -1,4 +1,5 @@
 import React from 'react';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {
   Container,
   Content,
@@ -10,7 +11,6 @@ import {
   Text,
   Touchable,
 } from './styles';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import types from './index.d';
 
 const Login: React.FC<types.Props> = ({ navigation }) => {
