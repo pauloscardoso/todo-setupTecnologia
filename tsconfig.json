@@ -32,7 +32,8 @@
     "paths": {
       "test-app": [
         "./__test__/helpers/test-app"
-      ]
+      ],
+      "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
     }
   },
   "exclude": [

@@ -1,6 +1,9 @@
 import React from 'react';
+import { Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { firebase } from 'src/firebase/config';
+import { useAppActions } from 'src/store/hooks';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { getApp, getAuth } from 'src/firebase/config';
 import {
   Container,
   Content,
@@ -12,11 +15,10 @@ import {
   Touchable,
 } from './styles';
 import types from './index.d';
-import { Alert } from 'react-native';
-import { useAppActions } from 'src/store/hooks';
 
 const Login: React.FC<types.Props> = ({ navigation }) => {
   const { signIn } = useAppActions();
+  const { setInstallation } = useAppActions();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -25,29 +27,14 @@ const Login: React.FC<types.Props> = ({ navigation }) => {
   };
 
   const onLoginPress = () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((response: GlobalProps.all) => {
-        const uid = response.user.uid;
-        const usersRef = firebase.firestore().collection('users');
-        usersRef
-          .doc(uid)
-          .get()
-          .then((firestoreDocument) => {
-            if (!firestoreDocument.exists) {
-              Alert.alert('User does not exist anymore.');
-              return;
-            }
-            const user = firestoreDocument.data();
-            signIn();
-          })
-          .catch((error) => {
-            console.log(`error ${error}`);
-          });
+    signInWithEmailAndPassword(getAuth(getApp()), email, password)
+      .then((userCredential: GlobalProps.all) => {
+        const { uid, email: userEmail } = userCredential.user;
+        setInstallation({ id: uid, email: userEmail });
+        signIn();
       })
-      .catch((e) => {
-        console.log(`erro ao criar um usuário ${e}`);
+      .catch((e: GlobalProps.error) => {
+        console.log(`erro ao logar um usuário ${e}`);
         if (e.code === 'auth/invalid-credential') {
           Alert.alert('User does not exist', 'Please try again');
         }

@@ -3,11 +3,13 @@ import { Container, Content, ContentTitle, Footer, Input, Text, Touchable } from
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import types from './index.d';
 import { Alert } from 'react-native';
-import { firebase } from 'src/firebase/config';
 import { useAppActions } from 'src/store/hooks';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getApp, getAuth } from 'src/firebase/config';
 
 const Registration: React.FC<types.Props> = ({ navigation }) => {
   const { signIn } = useAppActions();
+  const { setInstallation } = useAppActions();
   const [fullName, setFullName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -38,22 +40,18 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
       Alert.alert('Passwords do not match', 'Please enter matching passwords');
       return;
     }
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((res: any) => {
-        const uid = res.user.uid;
+    createUserWithEmailAndPassword(getAuth(getApp()), email, password)
+      .then((userCredential: any) => {
+        const { uid, email } = userCredential.user;
         const data: types.UserData = {
           id: uid,
           email,
           fullName,
         };
-        const usersRef = firebase.firestore().collection('users');
-        usersRef.doc(uid).set(data);
-
+        setInstallation(data);
         signIn();
       })
-      .catch((e) => {
+      .catch((e: GlobalProps.error) => {
         console.log(`erro ao criar um usuário ${e}`);
         if (e.code === 'auth/email-already-in-use') {
           Alert.alert('E-mail already in use', 'Please try another one');
