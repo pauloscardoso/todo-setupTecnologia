@@ -9,7 +9,7 @@ const firebaseConfig = {
   projectId: '942675038733',
   storageBucket: '942675038733.appspot.com',
   messagingSenderId: '942675038733',
-  appId: '1:942675038733:web:a7ffd5c21c763d0ffa3b44',
+  appId: '1:942675038733:android:a7ffd5c21c763d0ffa3b44',
 };
 
 if (!firebase.apps.length) {
