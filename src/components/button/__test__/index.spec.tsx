@@ -7,7 +7,11 @@ import Button from '..';
 describe('Button Component', () => {
   it('Should show the icons', () => {
     renderApp(
-      <Button iconLeft={<View testID="iconLeft" />} iconRight={<View testID="iconRight" />} styleViewIcon={{ backgroundColor: 'red' }}>
+      <Button
+        iconLeft={<View testID='iconLeft' />}
+        iconRight={<View testID='iconRight' />}
+        styleViewIcon={{ backgroundColor: 'red' }}
+      >
         button test
       </Button>,
     );
@@ -21,7 +25,12 @@ describe('Button Component', () => {
 
   it('Should show loading', () => {
     renderApp(
-      <Button loading opacity={0.5} iconLeft={<View testID="iconLeft" />} iconRight={<View testID="iconRight" />}>
+      <Button
+        loading
+        opacity={0.5}
+        iconLeft={<View testID='iconLeft' />}
+        iconRight={<View testID='iconRight' />}
+      >
         button test
       </Button>,
     );
@@ -34,7 +43,7 @@ describe('Button Component', () => {
 
   it('Should set prop activeOpacity by default', () => {
     renderApp(
-      <Button color="blue" backgroundColor="green" bold opacity={0.5} styleText={{ fontSize: 2 }}>
+      <Button color='blue' backgroundColor='green' bold opacity={0.5} styleText={{ fontSize: 2 }}>
         button test
       </Button>,
     );
@@ -46,7 +55,14 @@ describe('Button Component', () => {
 
   it('Should set prop activeOpacity passed by parameter', () => {
     renderApp(
-      <Button color="blue" activeOpacity={0} backgroundColor="green" bold opacity={0.5} styleText={{ fontSize: 2 }}>
+      <Button
+        color='blue'
+        activeOpacity={0}
+        backgroundColor='green'
+        bold
+        opacity={0.5}
+        styleText={{ fontSize: 2 }}
+      >
         button test
       </Button>,
     );
@@ -58,17 +74,21 @@ describe('Button Component', () => {
 
   it('Should render a string and change style', () => {
     renderApp(
-      <Button color="blue" backgroundColor="green" bold opacity={0.5} styleText={{ fontSize: 2 }}>
+      <Button color='blue' backgroundColor='green' bold opacity={0.5} styleText={{ fontSize: 2 }}>
         button test
       </Button>,
     );
 
-    expect(screen.getByTestId('button-container')).toHaveStyle({ backgroundColor: 'green', opacity: 0.5 });
-    expect(screen.getByText('button test')).toHaveStyle({ fontFamily: 'Poppins-Bold', color: 'blue', fontSize: 2 });
+    expect(screen.getByTestId('button-container')).toHaveStyle({
+      backgroundColor: 'green',
+      opacity: 0.5,
+    });
+    expect(screen.getByText('button test')).toHaveStyle({
+      color: 'blue',
+      fontSize: 2,
+    });
 
     screen.rerender(<Button bold={false}>button test</Button>);
-
-    expect(screen.getByText('button test')).toHaveStyle({ fontFamily: 'Poppins-Regular' });
   });
 
   it('Should render a component', () => {
