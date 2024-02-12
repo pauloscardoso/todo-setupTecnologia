@@ -36,13 +36,13 @@ const TodoScreen: React.FC = () => {
 
   const handleAddTodo = () => {
     if (newTodo.trim() !== '') {
-      addTodo(newTodo);
+      addTodo({ id: todos.length + 1, text: newTodo });
       setNewTodo('');
     }
   };
 
   const handleToggleTodo = (id: number) => {
-    toggleTodo(id);
+    toggleTodo({ id });
   };
 
   const handleDeleteTodo = (id: number) => {

@@ -9,6 +9,7 @@ const theme = {
     grayDarkMedium: '#222222',
     black: '#000000',
     red_primary: '#E8153F',
+    green: '#1EB21E',
   },
 };
 
