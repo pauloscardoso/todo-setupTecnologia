@@ -1,13 +1,6 @@
 import { reduxStorage } from '../index';
 
 describe('Storage', () => {
-  test('setItem should return a resolved promise with value true', () => {
-    const key = 'testKey';
-    const value = 'testValue';
-
-    return expect(reduxStorage.setItem(key, value)).resolves.toBe(true);
-  });
-
   test('setItem should call AsyncStorage.setItem with correct key and value', () => {
     const mockAsyncStorageSetItem = jest.fn();
     reduxStorage.setItem = mockAsyncStorageSetItem;
@@ -18,6 +11,13 @@ describe('Storage', () => {
     reduxStorage.setItem(key, value);
 
     expect(mockAsyncStorageSetItem).toHaveBeenCalledWith(key, value);
+  });
+
+  test('setItem should return a resolved promise with value true', () => {
+    const key = 'testKey';
+    const value = 'testValue';
+
+    return expect(reduxStorage.setItem(key, value)).resolves.toBe(true);
   });
 
   test('getItem with valid key', async () => {
