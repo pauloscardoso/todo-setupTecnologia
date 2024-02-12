@@ -4,18 +4,20 @@ import { persistor, store } from 'src/store';
 import { Provider } from 'react-redux';
 import { Platform, SafeAreaView, StatusBar } from 'react-native';
 import theme from 'src/global/theme';
-// import { PersistGate } from 'redux-persist/es/integration/react';
-import typ from './index.d';
+import types from './index.d';
 import { PersistGate } from 'redux-persist/integration/react';
 
-const Providers: React.FC<typ.Props> = ({ children }) => (
-  <SafeAreaView style={{ flex: 1, backgroundColor: theme.colors.grayLight }}>
+const Providers: React.FC<types.Props> = ({ children }) => (
+  <SafeAreaView
+    style={{ flex: 1, backgroundColor: theme.colors.grayLight }}
+    testID='providers-safe'
+  >
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-      <ThemeProvider theme={theme as DefaultTheme}>
-        <LoadStatusBar />
-        {children}
-      </ThemeProvider>
+        <ThemeProvider theme={theme as DefaultTheme}>
+          <LoadStatusBar testID='providers-status-bar' />
+          {children}
+        </ThemeProvider>
       </PersistGate>
     </Provider>
   </SafeAreaView>
@@ -23,7 +25,7 @@ const Providers: React.FC<typ.Props> = ({ children }) => (
 
 export { Providers };
 
-const LoadStatusBar = () => {
+const LoadStatusBar: React.FC<types.LoadStatusBarProps> = () => {
   React.useEffect(() => {
     {
       Platform.OS === 'android'
