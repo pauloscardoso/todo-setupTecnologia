@@ -1,10 +1,10 @@
 namespace _ {
-  export type ParamList = AuthStackProps.paramList;
+  export type ParamList = AppStackProps.paramList;
 }
 
 export default _;
 
-export namespace AuthStackProps {
+export namespace AppStackProps {
   export type paramList = {
     Todo: undefined;
   };

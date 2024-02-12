@@ -20,7 +20,7 @@ export const Title = styled.Text<{ color: string; bold?: boolean }>`
   text-align: center;
   font-size: ${Normalize.fontSize(14, 12)}px;
   color: ${({ color }) => color};
-  padding-top: ${({ theme }) => theme.fontPadding.top};
+  padding-top: ${({ theme }) => 3}px;
 `;
 
 export const ViewIcon = styled.View<{ left?: boolean }>`

@@ -21,7 +21,7 @@ import {
 } from './styles';
 import theme from 'src/global/theme';
 
-const Todo: React.FC = () => {
+const TodoScreen: React.FC = () => {
   const { signOut, addTodo, toggleTodo, deleteTodo } = useAppActions();
   const [newTodo, setNewTodo] = React.useState('');
 
@@ -87,4 +87,4 @@ const Todo: React.FC = () => {
   );
 };
 
-export { Todo };
+export { TodoScreen };

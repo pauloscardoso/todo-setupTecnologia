@@ -41,7 +41,7 @@ const Button: React.FC<typ.Props> = ({
       return (
         <>
           {iconLeft && !loading && (
-            <ViewIcon left style={styleViewIcon} testID="button-viewIconLeft">
+            <ViewIcon left style={styleViewIcon} testID='button-viewIconLeft'>
               {React.cloneElement(iconLeft, { color: colorText })}
             </ViewIcon>
           )}
@@ -49,12 +49,12 @@ const Button: React.FC<typ.Props> = ({
             {children}
           </Title>
           {loading && (
-            <ViewIcon testID="button-loading" style={styleViewIcon}>
-              <ActivityIndicator size="small" color={colorText} accessibilityHint="loading" />
+            <ViewIcon testID='button-loading' style={styleViewIcon}>
+              <ActivityIndicator size='small' color={colorText} accessibilityHint='loading' />
             </ViewIcon>
           )}
           {iconRight && !loading && (
-            <ViewIcon style={styleViewIcon} testID="button-viewIconRight">
+            <ViewIcon style={styleViewIcon} testID='button-viewIconRight'>
               {React.cloneElement(iconRight, { color: colorText })}
             </ViewIcon>
           )}
@@ -62,7 +62,7 @@ const Button: React.FC<typ.Props> = ({
       );
     }
     if (children) {
-      return <ButtonView testID="button-touchable">{children}</ButtonView>;
+      return <ButtonView testID='button-touchable'>{children}</ButtonView>;
     }
     return null;
   }, [children, iconLeft, loading, styleViewIcon, colorText, bold, styleText, iconRight]);

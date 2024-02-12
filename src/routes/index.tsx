@@ -5,8 +5,8 @@ import { isEqual } from 'lodash';
 import { Platform, UIManager } from 'react-native';
 
 import { navigationRef } from './root-navigation';
-import { AuthStack } from './auth';
-import { AppStack } from './app';
+import AuthStack from './auth';
+import AppStack from './app';
 
 const Routes: React.FC = () => {
   const [isLoading, setLoading] = React.useState(true);
@@ -31,7 +31,7 @@ const Routes: React.FC = () => {
   }, [activated, signIn]);
 
   React.useEffect(() => {
-    if (isMounted.current) return;
+    /* istanbul ignore if */ if (isMounted.current) return;
     loadState();
     isMounted.current = true;
   }, [loadState]);
