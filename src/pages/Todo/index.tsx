@@ -19,14 +19,13 @@ import {
   ToggleTodoButton,
   AddTodoText,
 } from './styles';
-import Button from 'src/components/button';
 import theme from 'src/global/theme';
 
 const Todo: React.FC = () => {
   const { signOut, addTodo, toggleTodo, deleteTodo } = useAppActions();
   const [newTodo, setNewTodo] = React.useState('');
 
-  const { fullName, email, todos } = useAppSelector(
+  const { todos } = useAppSelector(
     ({ installation, todos }) => ({
       fullName: installation.fullName || '',
       email: installation.email || '',
