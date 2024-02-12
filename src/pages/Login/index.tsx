@@ -27,6 +27,11 @@ const Login: React.FC<types.Props> = ({ navigation }) => {
   };
 
   const onLoginPress = () => {
+    if (password.length < 6) {
+      Alert.alert('Incorrect password', 'Please try again');
+      return;
+    }
+
     signInWithEmailAndPassword(getAuth(getApp()), email, password)
       .then((userCredential: GlobalProps.all) => {
         const { uid, email: userEmail } = userCredential.user;
@@ -36,7 +41,13 @@ const Login: React.FC<types.Props> = ({ navigation }) => {
       .catch((e: GlobalProps.error) => {
         console.log(`erro ao logar um usuário ${e}`);
         if (e.code === 'auth/invalid-credential') {
-          Alert.alert('User does not exist', 'Please try again');
+          Alert.alert('Something went wrong', 'Please try again');
+        }
+        if (e.code === 'auth/too-many-requests') {
+          Alert.alert(
+            'Many wrong attempts',
+            'You can immediately restore it by resetting your password or you can try again later',
+          );
         }
       });
   };

@@ -1,7 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { Todo } from 'src/pages/Todo';
 import typ from './index.d';
-import { Home } from 'src/pages/Home';
 
 const Stack = createNativeStackNavigator<typ.ParamList>();
 
@@ -11,11 +10,11 @@ const AppStack: React.FC = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName='Home'
+      initialRouteName='Todo'
     >
-      <Stack.Screen name='Home' component={Home} />
+      <Stack.Screen name='Todo' component={Todo} />
     </Stack.Navigator>
   );
 };
 
-export {AppStack}
+export { AppStack };

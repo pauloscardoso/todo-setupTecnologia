@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/native';
 import { stylesProps } from './index.d';
-import { normalizeFont } from 'src/utils/normalize/scale';
+import { Normalize } from 'src/utils/normalize';
 
 export const Container = styled.View`
   flex: 1;
@@ -53,26 +53,26 @@ export const Text = styled.Text<stylesProps.Text>`
     switch (variant) {
       case 'title':
         return css`
-          font-size: ${normalizeFont(20)};
+          font-size: ${Normalize.fontSize(20, 14)}px;
           color: ${({ theme }) => theme.colors.grayDarkMedium};
           font-weight: bold;
         `;
       case 'create':
         return css`
-          font-size: ${normalizeFont(16)};
+          font-size: ${Normalize.fontSize(16, 12)}px;
           font-weight: bold;
           color: ${theme.colors.white};
         `;
       case 'footer':
         return css`
-          font-size: ${normalizeFont(16)};
+          font-size: ${Normalize.fontSize(16, 12)}px;
           color: ${({ theme }) => theme.colors.gray};
           margin-right: 4px;
           margin-top: 6px;
         `;
       case 'footerLink':
         return css`
-          font-size: ${normalizeFont(16)};
+          font-size: ${Normalize.fontSize(16, 12)}px;
           font-weight: bold;
           margin-top: 6px;
           color: #788eec;

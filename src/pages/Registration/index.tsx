@@ -49,7 +49,8 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
           fullName,
         };
         setInstallation(data);
-        signIn();
+        Alert.alert('Login created!');
+        navigation.navigate('Login');
       })
       .catch((e: GlobalProps.error) => {
         console.log(`erro ao criar um usuário ${e}`);

@@ -1,6 +1,6 @@
 import { AnyAction, Reducer, configureStore } from '@reduxjs/toolkit';
 import authReducer from './slices/auth';
-import todoReducer from './slices/todo';
+import todoReducer from './slices/todos';
 import installation from './slices/installation';
 import { persistentStorages } from './persistent-storage';
 import { reduxStorage } from './storage';
