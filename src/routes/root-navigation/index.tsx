@@ -8,6 +8,12 @@ const navigateRoot = {
     if (navigationRef.current) navigationRef.current?.navigate(name, params);
   },
   getCurrentRoute: () => navigationRef.current?.getCurrentRoute(),
+  isReady: () => {
+    if (navigationRef.current) {
+      return navigationRef.current.isReady();
+    }
+    return undefined;
+  },
 };
 
 export { navigateRoot, navigationRef };
