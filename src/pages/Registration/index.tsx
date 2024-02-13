@@ -8,7 +8,6 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { getApp, getAuth } from 'src/firebase/config';
 
 const Registration: React.FC<types.Props> = ({ navigation }) => {
-  const { signIn } = useAppActions();
   const { setInstallation } = useAppActions();
   const [fullName, setFullName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -32,10 +31,6 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
       Alert.alert('Invalid Password', 'Please enter a password with at least 6 characters');
       return;
     }
-    if (!password) {
-      Alert.alert('Invalid Password', 'Please enter your password');
-      return;
-    }
     if (password !== confirmPassword) {
       Alert.alert('Passwords do not match', 'Please enter matching passwords');
       return;
@@ -49,7 +44,7 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
           fullName,
         };
         setInstallation(data);
-        Alert.alert('Login created!');
+        Alert.alert('Account created!', 'Your account has been created successfully');
         navigation.navigate('Login');
       })
       .catch((e: GlobalProps.error) => {

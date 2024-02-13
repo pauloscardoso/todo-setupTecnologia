@@ -1,3 +1,12 @@
+const userCredentialMock = {
+  user: {
+    fullName: 'John Doe',
+    email: 'XfW5t@example.com',
+    uid: '1',
+    emailVerified: false,
+  },
+};
+
 jest.mock('firebase/auth', () => ({
   getAuth: jest.fn(() => {
     return {
@@ -15,8 +24,13 @@ jest.mock('firebase/auth', () => ({
     };
   }),
   signInWithEmailAndPassword: jest.fn(() => {
-    return new Promise((res, rej) => {
+    return new Promise((res) => {
       res(null);
+    });
+  }),
+  createUserWithEmailAndPassword: jest.fn(() => {
+    return new Promise((res) => {
+      res(userCredentialMock);
     });
   }),
 }));
