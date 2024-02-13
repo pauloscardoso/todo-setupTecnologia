@@ -43,6 +43,9 @@ const Login: React.FC<types.Props> = ({ navigation }) => {
         if (e.code === 'auth/invalid-credential') {
           Alert.alert('Something went wrong', 'Please try again');
         }
+        if (e.code === 'auth/invalid-login-credentials') {
+          Alert.alert('Registration not found', 'Register.');
+        }
         if (e.code === 'auth/too-many-requests') {
           Alert.alert(
             'Many wrong attempts',

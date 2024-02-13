@@ -1,6 +1,6 @@
 import { isEqual } from 'lodash';
 import React from 'react';
-import { FlatList } from 'react-native';
+import { Alert, FlatList } from 'react-native';
 import { useAppActions, useAppSelector } from 'src/store/hooks';
 import {
   AddNewTodoInput,
@@ -34,6 +34,19 @@ const TodoScreen: React.FC = () => {
     isEqual,
   );
 
+  const handleLogout = () => {
+    Alert.alert('Logout', 'Are you sure you want to logout?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'OK',
+        onPress: () => signOut(),
+      },
+    ]);
+  };
+
   const handleAddTodo = () => {
     if (newTodo.trim() !== '') {
       addTodo({ id: todos.length + 1, text: newTodo });
@@ -52,7 +65,7 @@ const TodoScreen: React.FC = () => {
   return (
     <Container>
       <Header>
-        <SignOutButton onPress={() => signOut()}>Logout</SignOutButton>
+        <SignOutButton onPress={handleLogout}>Logout</SignOutButton>
       </Header>
       <TodosContent>
         <Title>Todo</Title>
@@ -63,7 +76,10 @@ const TodoScreen: React.FC = () => {
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <AddedTodo selected={item.completed}>
-              <ToggleTodoButton onPress={() => handleToggleTodo(item.id)}></ToggleTodoButton>
+              <ToggleTodoButton
+                onPress={() => handleToggleTodo(item.id)}
+                testID='todo-toggleButton'
+              ></ToggleTodoButton>
               <AddTodoText>{item.text}</AddTodoText>
               <DeleteTodoButtonContainer>
                 <DeleteTodoButton onPress={() => handleDeleteTodo(item.id)}>
@@ -76,7 +92,7 @@ const TodoScreen: React.FC = () => {
       </TodosContent>
       <FooterContent>
         <AddNewTodoInput
-          placeholder='Add a new todo'
+          placeholder='Add a new task'
           placeholderTextColor={theme.colors.gray}
           value={newTodo}
           onChangeText={(text) => setNewTodo(text)}
