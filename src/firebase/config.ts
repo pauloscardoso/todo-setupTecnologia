@@ -4,13 +4,13 @@ import { getAuth, getReactNativePersistence, initializeAuth } from 'firebase/aut
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const firebaseConfig = {
-  apiKey: 'AIzaSyBhFwoC2HAxWYSpXv1cdFbkv3VLBgFn4lU',
-  authDomain: 'todoauth-68a50.firebaseapp.com',
-  projectId: 'todoauth-68a50',
-  storageBucket: 'todoauth-68a50.appspot.com',
-  messagingSenderId: '942675038733',
-  appId: '1:942675038733:web:3267d7da910408dffa3b44',
-  measurementId: 'G-QM0P3SFYST',
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APPID,
+  measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

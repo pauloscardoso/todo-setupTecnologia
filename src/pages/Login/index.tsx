@@ -44,7 +44,10 @@ const Login: React.FC<types.Props> = ({ navigation }) => {
           Alert.alert('Something went wrong', 'Please try again');
         }
         if (e.code === 'auth/invalid-login-credentials') {
-          Alert.alert('Registration not found', 'Register.');
+          Alert.alert('E-mail or password incorrect', 'Please try again');
+        }
+        if (e.code === 'auth/invalid-email') {
+          Alert.alert('Email not found', 'Register or try again');
         }
         if (e.code === 'auth/too-many-requests') {
           Alert.alert(
