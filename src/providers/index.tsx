@@ -32,6 +32,7 @@ const LoadStatusBar: React.FC<types.LoadStatusBarProps> = () => {
         ? StatusBar.setBackgroundColor(theme.colors.grayLight, true)
         : undefined;
     }
+    StatusBar.setBarStyle('dark-content');
   });
 
   return null;
