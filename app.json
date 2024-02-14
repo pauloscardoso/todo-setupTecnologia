@@ -2,9 +2,12 @@
   "expo": {
     "name": "todo-setupTecnologia",
     "slug": "todo-setupTecnologia",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "version": "1.0.1",
+    "assetBundlePatterns": ["**/*"],
+    "extra": {
+      "eas": {
+        "projectId": "f70a60de-02af-4004-8880-2b4cd74449c6"
+      }
+    }
   }
 }

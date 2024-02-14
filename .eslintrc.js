@@ -3,7 +3,7 @@ module.exports = {
   env: {
     es2021: true,
     node: true,
-    // jest: true,
+    jest: true,
   },
   plugins: ['react'],
   extends: ['universe/native', 'plugin:import/recommended'],
