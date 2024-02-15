@@ -11,6 +11,7 @@ import {
   Footer,
   FooterLink,
   Input,
+  Loading,
   Text,
   Touchable,
 } from './styles';
@@ -21,14 +22,27 @@ const Login: React.FC<types.Props> = ({ navigation }) => {
   const { setInstallation } = useAppActions();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [isLoading, setLoading] = React.useState(false);
 
   const onFooterLinkPress = () => {
     navigation.navigate('Registration');
   };
 
   const onLoginPress = () => {
+    setLoading(true);
+    if (!email && !password) {
+      Alert.alert('E-mail and password are required', 'Please try again');
+      setLoading(false);
+      return;
+    }
+    if (!email) {
+      Alert.alert('E-mail is required', 'Please try again');
+      setLoading(false);
+      return;
+    }
     if (password.length < 6) {
       Alert.alert('Incorrect password', 'Please try again');
+      setLoading(false);
       return;
     }
 
@@ -39,6 +53,7 @@ const Login: React.FC<types.Props> = ({ navigation }) => {
         signIn();
       })
       .catch((e: GlobalProps.error) => {
+        setLoading(false);
         console.log(`erro ao logar um usuário ${e}`);
         if (e.code === 'auth/invalid-credential') {
           Alert.alert('Something went wrong', 'Please try again');
@@ -84,7 +99,7 @@ const Login: React.FC<types.Props> = ({ navigation }) => {
             autoCapitalize='none'
           />
           <Touchable onPress={() => onLoginPress()}>
-            <Text variant='login'>Log in</Text>
+            {isLoading ? <Loading /> : <Text variant='login'>Log in</Text>}
           </Touchable>
           <Footer>
             <Text variant='footer'>Don't have an account?</Text>

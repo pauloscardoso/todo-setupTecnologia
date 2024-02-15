@@ -19,6 +19,10 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
   };
 
   const onRegisterPress = () => {
+    if (!fullName && !email && !password && !confirmPassword) {
+      Alert.alert('Invalid Data', 'Please enter your data');
+      return;
+    }
     if (!fullName) {
       Alert.alert('Invalid Name', 'Please enter your full name');
       return;
