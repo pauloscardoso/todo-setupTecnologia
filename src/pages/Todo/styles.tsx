@@ -154,4 +154,5 @@ export const AddNewTodoInput = styled.TextInput`
   text-align: center;
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.grayDark};
+  color: ${({ theme }) => theme.colors.grayLight};
 `;
