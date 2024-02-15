@@ -82,3 +82,8 @@ export const Text = styled.Text<stylesProps.Text>`
     }
   }}
 `;
+
+export const Loading = styled.ActivityIndicator.attrs(({ theme }) => ({
+  color: theme.colors.white,
+  size: 20,
+}))``;

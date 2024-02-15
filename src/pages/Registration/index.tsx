@@ -1,5 +1,14 @@
 import React from 'react';
-import { Container, Content, ContentTitle, Footer, Input, Text, Touchable } from './styles';
+import {
+  Container,
+  Content,
+  ContentTitle,
+  Footer,
+  Input,
+  Loading,
+  Text,
+  Touchable,
+} from './styles';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import types from './index.d';
 import { Alert } from 'react-native';
@@ -13,30 +22,37 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
+  const [isLoading, setLoading] = React.useState(false);
 
   const onFooterLinkPress = () => {
     navigation.navigate('Login');
   };
 
   const onRegisterPress = () => {
+    setLoading(true);
     if (!fullName && !email && !password && !confirmPassword) {
       Alert.alert('Invalid Data', 'Please enter your data');
+      setLoading(false);
       return;
     }
     if (!fullName) {
       Alert.alert('Invalid Name', 'Please enter your full name');
+      setLoading(false);
       return;
     }
     if (!email.match(/\S+@\S+\.\S+/)) {
       Alert.alert('Invalid Email', 'Please enter a valid email');
+      setLoading(false);
       return;
     }
     if (password.length < 6) {
       Alert.alert('Invalid Password', 'Please enter a password with at least 6 characters');
+      setLoading(false);
       return;
     }
     if (password !== confirmPassword) {
       Alert.alert('Passwords do not match', 'Please enter matching passwords');
+      setLoading(false);
       return;
     }
     createUserWithEmailAndPassword(getAuth(getApp()), email, password)
@@ -52,6 +68,7 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
         navigation.navigate('Login');
       })
       .catch((e: GlobalProps.error) => {
+        setLoading(false);
         console.log(`erro ao criar um usuário ${e}`);
         if (e.code === 'auth/email-already-in-use') {
           Alert.alert('E-mail already in use', 'Please try another one');
@@ -105,7 +122,7 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
             autoCapitalize='none'
           />
           <Touchable onPress={() => onRegisterPress()}>
-            <Text variant='create'>Create account</Text>
+            {isLoading ? <Loading /> : <Text variant='create'>Create account</Text>}
           </Touchable>
           <Footer>
             <Text variant='footer'>
