@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { FlatList } from 'react-native';
+import { CheckIcon, CloseIcon } from 'src/components/Icon';
 import Button from 'src/components/button';
 import theme from 'src/global/theme';
 import { Normalize } from 'src/utils/normalize';
@@ -57,7 +57,7 @@ export const AddedTodo = styled.View<{ selected: ReactNode | string | null }>`
   ${({ selected }) =>
     selected &&
     css`
-      background-color: ${({ theme }) => theme.colors.grayMedium};
+      background-color: ${({ theme }) => theme.colors.gray};
     `};
 `;
 
@@ -75,13 +75,7 @@ export const AddTodoButton = styled(Button).attrs({
   background-color: ${({ theme }) => theme.colors.grayDark};
 `;
 
-export const ToggleTodoButton = styled(Button).attrs({
-  styleText: {
-    fontSize: Normalize.fontSize(18, 14),
-    color: theme.colors.white,
-    fontWeight: 'bold',
-  },
-  activeOpacity: 0.8,
+export const ToggleTodoButton = styled(Button).attrs<{ selected: ReactNode | string | null }>({
   hitSlop: {
     top: 30,
     right: 30,
@@ -89,15 +83,35 @@ export const ToggleTodoButton = styled(Button).attrs({
     left: 30,
   },
 })`
-  width: 16px;
-  height: 16px;
-  border-radius: 20px;
-  background-color: ${({ theme }) => theme.colors.grayDarkLight};
-  margin-right: 6px;
+  width: 14px;
+  height: 14px;
+  background-color: ${({ theme }) => theme.colors.grayDark};
+  border: 2px solid ${({ theme }) => theme.colors.white};
+  margin-right: 10px;
+  ${({ selected }) =>
+    selected &&
+    css`
+      background-color: ${({ theme }) => theme.colors.gray};
+      border: none;
+    `};
 `;
 
-export const AddTodoText = styled.Text`
+export const IconCheck = styled(CheckIcon).attrs({
+  width: Normalize.size(20, 14),
+  height: Normalize.size(20, 14),
+  color: theme.colors.green,
+})``;
+
+export const AddedTodoText = styled.Text<{ selected: ReactNode | string | null }>`
   color: ${({ theme }) => theme.colors.white};
+  font-size: ${Normalize.fontSize(16, 12)}px;
+  font-weight: bold;
+
+  ${({ selected }) =>
+    selected &&
+    css`
+      text-decoration: line-through;
+    `};
 `;
 
 export const DeleteTodoButtonContainer = styled.View`
@@ -122,11 +136,11 @@ export const DeleteTodoButton = styled(Button).attrs({
   background-color: ${({ theme }) => theme.colors.red_primary};
 `;
 
-export const DeleteTodoButtonTitle = styled.Text`
-  color: ${({ theme }) => theme.colors.white};
-  font-size: 10px;
-  font-weight: bold;
-`;
+export const IconClose = styled(CloseIcon).attrs({
+  width: Normalize.size(10),
+  height: Normalize.size(10),
+  color: theme.colors.white,
+})``;
 
 export const Separator = styled.View`
   height: 1px;
@@ -154,5 +168,5 @@ export const AddNewTodoInput = styled.TextInput`
   text-align: center;
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.grayDark};
-  color: ${({ theme }) => theme.colors.grayLight};
+  color: ${({ theme }) => theme.colors.white};
 `;

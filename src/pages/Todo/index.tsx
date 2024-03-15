@@ -9,7 +9,6 @@ import {
   Container,
   DeleteTodoButton,
   DeleteTodoButtonContainer,
-  DeleteTodoButtonTitle,
   FooterContent,
   Header,
   Separator,
@@ -17,7 +16,9 @@ import {
   Title,
   TodosContent,
   ToggleTodoButton,
-  AddTodoText,
+  AddedTodoText,
+  IconCheck,
+  IconClose,
 } from './styles';
 import theme from 'src/global/theme';
 
@@ -77,13 +78,16 @@ const TodoScreen: React.FC = () => {
           renderItem={({ item }) => (
             <AddedTodo selected={item.completed}>
               <ToggleTodoButton
+                selected={item.completed}
                 onPress={() => handleToggleTodo(item.id)}
                 testID='todo-toggleButton'
-              ></ToggleTodoButton>
-              <AddTodoText>{item.text}</AddTodoText>
+              >
+                {item.completed && <IconCheck />}
+              </ToggleTodoButton>
+              <AddedTodoText selected={item.completed}>{item.text}</AddedTodoText>
               <DeleteTodoButtonContainer>
                 <DeleteTodoButton onPress={() => handleDeleteTodo(item.id)}>
-                  <DeleteTodoButtonTitle>X</DeleteTodoButtonTitle>
+                  <IconClose />
                 </DeleteTodoButton>
               </DeleteTodoButtonContainer>
             </AddedTodo>
