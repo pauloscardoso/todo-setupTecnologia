@@ -28,9 +28,11 @@ jobs:
           node-version: '16'
           cache: 'npm'
 
+      - name: Clear npm cache
+        run: npm cache clean --force
+
       - name: Run NPM Install
         run: |
-          npm i -g corepack
           npm install
 
       - name: Build application
