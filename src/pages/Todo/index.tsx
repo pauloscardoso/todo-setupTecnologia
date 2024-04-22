@@ -99,7 +99,7 @@ const TodoScreen: React.FC = () => {
           placeholder='Add a new task'
           placeholderTextColor={theme.colors.gray}
           value={newTodo}
-          onChangeText={(text) => setNewTodo(text)}
+          onChangeText={(text: string) => setNewTodo(text)}
         />
         <AddTodoButton onPress={handleAddTodo}>+</AddTodoButton>
       </FooterContent>

@@ -111,6 +111,7 @@ export const AddedTodoText = styled.Text<{ selected: ReactNode | string | null }
     selected &&
     css`
       text-decoration: line-through;
+      color: ${({ theme }) => theme.colors.black};
     `};
 `;
 

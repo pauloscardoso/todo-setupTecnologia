@@ -30,18 +30,30 @@ const Login: React.FC<types.Props> = ({ navigation }) => {
 
   const onLoginPress = () => {
     setLoading(true);
-    if (!email && !password) {
-      Alert.alert('E-mail and password are required', 'Please try again');
-      setLoading(false);
-      return;
-    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!email) {
       Alert.alert('E-mail is required', 'Please try again');
       setLoading(false);
       return;
     }
+    if (!emailRegex.test(email)) {
+      Alert.alert('E-mail invalid', 'Please enter a valid email');
+      setLoading(false);
+      return;
+    }
+    if (!email && !password) {
+      Alert.alert('E-mail and password are required', 'Please try again');
+      setLoading(false);
+      return;
+    }
+    if (!password) {
+      Alert.alert('Password is required', 'Please try again');
+      setLoading(false);
+      return;
+    }
     if (password.length < 6) {
-      Alert.alert('Incorrect password', 'Please try again');
+      Alert.alert('Password must be at least 6 characters', 'Please try again');
       setLoading(false);
       return;
     }
@@ -52,7 +64,7 @@ const Login: React.FC<types.Props> = ({ navigation }) => {
         setInstallation({ id: uid, email: userEmail });
         signIn();
       })
-      .catch((e: GlobalProps.error) => {
+      .catch((e: GlobalProps.all) => {
         setLoading(false);
         console.log(`erro ao logar um usuário ${e}`);
         if (e.code === 'auth/invalid-credential') {

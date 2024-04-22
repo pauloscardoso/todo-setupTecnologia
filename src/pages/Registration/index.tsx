@@ -30,13 +30,30 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
 
   const onRegisterPress = () => {
     setLoading(true);
-    if (!fullName && !email && !password && !confirmPassword) {
-      Alert.alert('Invalid Data', 'Please enter your data');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!fullName) {
+      Alert.alert('Name is required', 'Please enter your full name');
       setLoading(false);
       return;
     }
-    if (!fullName) {
-      Alert.alert('Invalid Name', 'Please enter your full name');
+    if (!email) {
+      Alert.alert('Email is required', 'Please enter your email');
+      setLoading(false);
+      return;
+    }
+    if (!emailRegex.test(email)) {
+      Alert.alert('Email invalid', 'Please enter a valid email');
+      setLoading(false);
+      return;
+    }
+    if (!password) {
+      Alert.alert('Password is required', 'Please enter your password');
+      setLoading(false);
+      return;
+    }
+    if (!confirmPassword) {
+      Alert.alert('Confirm Password is required', 'Please enter your confirm password');
       setLoading(false);
       return;
     }
@@ -67,7 +84,7 @@ const Registration: React.FC<types.Props> = ({ navigation }) => {
         Alert.alert('Account created!', 'Your account has been created successfully');
         navigation.navigate('Login');
       })
-      .catch((e: GlobalProps.error) => {
+      .catch((e: GlobalProps.all) => {
         setLoading(false);
         console.log(`erro ao criar um usuário ${e}`);
         if (e.code === 'auth/email-already-in-use') {
